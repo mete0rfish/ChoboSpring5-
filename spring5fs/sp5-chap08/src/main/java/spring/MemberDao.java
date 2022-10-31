@@ -70,7 +70,7 @@ public class MemberDao {
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				// 파라미터로 전달받은 Connection을 이용해서 PreparedStatment 생성
 				PreparedStatement pstmt = con.prepareStatement(
-						"insert into MEMBER (EMAIL, PASSWORD, NAME, REGDATE) values (?,?,?,?)");
+						"insert IGNORE into MEMBER (EMAIL, PASSWORD, NAME, REGDATE) values (?,?,?,?)");
 				// 인덱스 파라미터의 값 설정
 				pstmt.setString(1, member.getEmail());
 				pstmt.setString(2, member.getPassword());
@@ -98,7 +98,7 @@ public class MemberDao {
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
 				PreparedStatement pstmt = con.prepareStatement(
-						"insert into MEMBER(EMAIL, PASSWORD, NAME, REGDATE) " +
+						"insert IGNORE into MEMBER(EMAIL, PASSWORD, NAME, REGDATE) " +
 								"values(?,?,?,?)",
 						new String[]{"ID"});
 				pstmt.setString(1, member.getEmail());
